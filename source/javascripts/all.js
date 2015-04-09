@@ -34,7 +34,7 @@
         uploadCount = 0,
         imageUrls = [],
         progressTotal = 5 + imageData.length*2,
-        progessCount = 0;
+        progressCount = 0;
     if(opts.progress) opts.progress(progressCount, progressTotal);
     client.mkdir(projectDir, function(err, stat) {
       if(err) throw err;
@@ -108,7 +108,7 @@
       doAuth(function(err, client) {
         if (err) throw err;
         saveToDropbox({
-          progress: function(s, t) { console.log(t/s + '%'); },
+          progress: function(s, t) { console.log((s/t)*100 + '%'); },
           finished: function(embedCode) { console.log(embedCode); }
         });
       });
