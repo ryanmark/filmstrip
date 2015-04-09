@@ -4,23 +4,39 @@
 	.filmstrip-outer-wrapper {
 	    width: 100%;
 	    margin-bottom: 1em;
-	 
-	    .filmstrip-wrapper {
-	        width: 720px;
-	        height: 528px;
-	    }
-	 
-	    .filmstrip {
-	        width: 100%;
-	        height: 100%;
-	        -webkit-animation-name: dog;
-			-webkit-animation-duration: 2s;
-			-webkit-animation-iteration-count: infinite;
-			-webkit-animation-timing-function: linear;
-			-webkit-animation-timing-function:steps(1, end);
-	        background-size: 800px;
-	    }
 	}
+
+	.filmstrip-wrapper {
+        width: 720px;
+        height: 528px;
+    }
+	 
+    .filmstrip {
+        width: 100%;
+        height: 100%;
+        -webkit-animation-name: gif;
+		-webkit-animation-duration: 2s;
+		-webkit-animation-iteration-count: infinite;
+		-webkit-animation-timing-function: linear;
+		-webkit-animation-timing-function:steps(1, end);
+        background-size: 800px;
+    }
+
+    @-webkit-keyframes gif {
+    	<%
+	    var num_frames = imageUrls.length,
+	    frames_array = num_frames - 1,
+	    increment = Math.floor(100 / frames_array);
+
+		for (var i = 0; i < num_frames; i++) {
+			var frame_percentage = i * increment;
+			if ((i == frames_array) && (frame_percentage !== 100)) { %>
+				100% { background-image: url('<%= imageUrls[i] %>');}
+			<% } else { %>
+				<%= frame_percentage %>% { background-image: url('<%= imageUrls[i] %>');}
+			<% }
+		} %>
+    }
 </style>
 
 <div class="filmstrip-outer-wrapper">
@@ -28,7 +44,3 @@
 		<div class="filmstrip animated"></div>
 	</div>
 </div>
-
-<% for(var i = 0; i < imageUrls.length; i++) { %>
-  <img src="<%= imageUrls[i] %>">
-<% } %>
