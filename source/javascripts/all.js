@@ -15,14 +15,14 @@
     });
   };
 
-  var handleUpload = function(files) {
+  var showMosaic = function(selector, files) {
     $.each(files, function(i, file) {
       var img = new Image();
       img.id = 'upload' + i;
-      $('#mosaic').append(img);
+      $(selector).append(img);
       reader = new FileReader();
       reader.onload = function (event) {
-        img.src = imageData[i] = event.target.result;
+        img.src = event.target.result;
       };
       reader.readAsDataURL(file);
     });
@@ -102,7 +102,8 @@
     holder.ondrop = function (e) {
       e.preventDefault();
       this.className = '';
-      handleUpload(e.dataTransfer.files);
+      imageData = e.dataTransfer.files;
+      showMosaic('#mosaic', e.dataTransfer.files);
     };
 
     $('#publish').click(function(eve) {
