@@ -1,3 +1,16 @@
 @charset "utf-8";
 
+#holder {
+  border: 10px dashed #ccc;
+  width: 50%;
+  height: 300px;
+  margin: 20px auto;
+  float:left;
+  box-sizing: border-box;
+}
+#holder.hover { border: 10px dashed #333; }
 
+#mosaic {width:50%; float:left;}
+#mosaic img {
+  max-width: 150px;
+}
