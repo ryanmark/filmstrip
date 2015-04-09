@@ -34,21 +34,23 @@
         uploadCount = 0,
         imageUrls = [],
         progressTotal = 5 + imageData.length*2,
-        progressCount = 0;
+        progressCount = 0,
+        errorCallback = function(err) { throw err; };
     if(opts.progress) opts.progress(progressCount, progressTotal);
+    if(opts.error) errorCallback = opts.error;
     client.mkdir(projectDir, function(err, stat) {
-      if(err) throw err;
+      if(err) return errorCallback(err);
       progressCount++;
       if(opts.progress) opts.progress(progressCount, progressTotal);
       $.each(imageData, function(i, data) {
         var imagePath = projectDir + '/img' + i + '.jpg';
         client.writeFile(imagePath, data, function(err, stat) {
-          if(err) throw err;
+          if(err) return errorCallback(err);
           progressCount++;
           if(opts.progress) opts.progress(progressCount, progressTotal);
           var urlOpts = { downloadHack: true, longUrl: true };
           client.makeUrl(imagePath, urlOpts, function(err, url) {
-            if(err) throw err;
+            if(err) return errorCallback(err);
             progressCount++;
             if(opts.progress) opts.progress(progressCount, progressTotal);
             imageUrls[i] = url.url;
@@ -57,20 +59,20 @@
                 embedCodePath = projectDir + '/embed.txt',
                 data = { imageUrls: imageUrls };
             client.writeFile(indexPath, embedTmpl(data), function(err, stat){
-              if(err) throw err;
+              if(err) return errorCallback(err);
               progressCount++;
               if(opts.progress) opts.progress(progressCount, progressTotal);
               client.makeUrl(indexPath, urlOpts, function(err, url) {
-                if(err) throw err;
+                if(err) return errorCallback(err);
                 progressCount++;
                 if(opts.progress) opts.progress(progressCount, progressTotal);
                 var embedCode = codeTmpl({ name: projectSlug, url: url.url });
                 client.writeFile(embedCodePath, embedCode, function(err, stat){
-                  if(err) throw err;
+                  if(err) return errorCallback(err);
                   progressCount++;
                   if(opts.progress) opts.progress(progressCount, progressTotal);
                   client.makeUrl(indexPath, urlOpts, function(err, url) {
-                    if(err) throw err;
+                    if(err) return errorCallback(err);
                     progressCount++;
                     if(opts.progress) opts.progress(progressCount, progressTotal);
                     if(opts.finished) opts.finished(embedCode);
@@ -109,7 +111,8 @@
         if (err) throw err;
         saveToDropbox({
           progress: function(s, t) { console.log((s/t)*100 + '%'); },
-          finished: function(embedCode) { console.log(embedCode); }
+          finished: function(embedCode) { console.log(embedCode); },
+          error: function(err) { alert(err.response.error); }
         });
       });
     });
