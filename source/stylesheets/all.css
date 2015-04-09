@@ -13,4 +13,6 @@
 #mosaic {width:50%; float:left;}
 #mosaic img {
   max-width: 150px;
+  min-width:75px;
+  width:33%;
 }
