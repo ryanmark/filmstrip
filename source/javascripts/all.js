@@ -1,13 +1,10 @@
 //= require_tree .
-
 (function($) {
-  _.templateSettings = {
-    interpolate: /\{\{(.+?)\}\}/g,
-    evaluate: /\{\%(.+?)\%\}/g
-  };
   // Browser-side applications do not use the API secret.
   var client = new Dropbox.Client({ key: "v0wp7w9d9w6c2e2" }),
-      tmpl, imageData = [];
+      embedTmpl = JST["templates/embed"],
+      codeTmpl  = JST["templates/code"],
+      imageData = [];
 
   var renderEmbed = function(data) {
     return tmpl(data);
@@ -65,7 +62,6 @@
   };
 
   $(document).ready(function() {
-    tmpl = _.template($('#embed-template').html());
 
     var holder = document.getElementById('holder'),
         state = document.getElementById('status');
