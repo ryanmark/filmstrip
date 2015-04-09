@@ -4,11 +4,8 @@
   var client = new Dropbox.Client({ key: "v0wp7w9d9w6c2e2" }),
       embedTmpl = JST["templates/embed"],
       codeTmpl  = JST["templates/code"],
-      imageData = [];
-
-  var renderEmbed = function(data) {
-    return tmpl(data);
-  };
+      imageData = [],
+      projectName = 'Test Project';
 
   var doAuth = function(cb) {
     if (client.isAuthenticated()) return cb();
@@ -31,28 +28,54 @@
     });
   };
 
-  var saveToDropbox = function() {
-    var projectDir = 'test-filmstrip',
+  var saveToDropbox = function(opts) {
+    var projectSlug = s.slugify(projectName),
+        projectDir = projectSlug,
         uploadCount = 0,
-        imageUrls = [];
+        imageUrls = [],
+        progressTotal = 5 + imageData.length*2,
+        progessCount = 0;
+    if(opts.progress) opts.progress(progressCount, progressTotal);
     client.mkdir(projectDir, function(err, stat) {
       if(err) throw err;
+      progressCount++;
+      if(opts.progress) opts.progress(progressCount, progressTotal);
       $.each(imageData, function(i, data) {
         var imagePath = projectDir + '/img' + i + '.jpg';
         client.writeFile(imagePath, data, function(err, stat) {
           if(err) throw err;
+          progressCount++;
+          if(opts.progress) opts.progress(progressCount, progressTotal);
           var urlOpts = { downloadHack: true, longUrl: true };
           client.makeUrl(imagePath, urlOpts, function(err, url) {
             if(err) throw err;
+            progressCount++;
+            if(opts.progress) opts.progress(progressCount, progressTotal);
             imageUrls[i] = url.url;
             if (imageUrls.length != imageData.length) return;
             var indexPath = projectDir + '/index.html',
+                embedCodePath = projectDir + '/embed.txt',
                 data = { imageUrls: imageUrls };
-            client.writeFile(indexPath, renderEmbed(data), function(err, stat){
+            client.writeFile(indexPath, embedTmpl(data), function(err, stat){
               if(err) throw err;
+              progressCount++;
+              if(opts.progress) opts.progress(progressCount, progressTotal);
               client.makeUrl(indexPath, urlOpts, function(err, url) {
                 if(err) throw err;
-                console.log(url);
+                progressCount++;
+                if(opts.progress) opts.progress(progressCount, progressTotal);
+                var embedCode = codeTmpl({ name: projectSlug, url: url.url });
+                client.writeFile(embedCodePath, embedCode, function(err, stat){
+                  if(err) throw err;
+                  progressCount++;
+                  if(opts.progress) opts.progress(progressCount, progressTotal);
+                  client.makeUrl(indexPath, urlOpts, function(err, url) {
+                    if(err) throw err;
+                    progressCount++;
+                    if(opts.progress) opts.progress(progressCount, progressTotal);
+                    if(opts.finished) opts.finished(embedCode);
+                  });
+                });
               });
             });
           });
@@ -82,7 +105,13 @@
 
     $('#publish').click(function(eve) {
       eve.preventDefault();
-      doAuth(saveToDropbox);
+      doAuth(function(err, client) {
+        if (err) throw err;
+        saveToDropbox({
+          progress: function(s, t) { console.log(t/s + '%'); },
+          finished: function(embedCode) { console.log(embedCode); }
+        });
+      });
     });
   });
 })(jQuery);
