@@ -22,7 +22,7 @@
             // background-image: url('../img/filmstrip-cotton-archive.jpg');
         }
     }
-
+}
  //    @-webkit-keyframes gif {
 	//   0% {
 	//     background-image: url('../images/demo/frame1.jpg');
@@ -44,36 +44,35 @@
 	//   }
 	// }
 
-	@-webkit-keyframes dog {
-	  0% {
-	    background-image: url('../images/demo/dog1.jpg');
-	  }
-	  11% {
-	    background-image: url('../images/demo/dog2.jpg');
-	  }
-	  22% {
-	    background-image: url('../images/demo/dog3.jpg');
-	  }
-	  33% {
-	    background-image: url('../images/demo/dog4.jpg');
-	  }
-	  44% {
-	    background-image: url('../images/demo/dog5.jpg');
-	  }
-	  55% {
-	    background-image: url('../images/demo/dog6.jpg');
-	  }
-	  66% {
-		background-image: url('../images/demo/dog7.jpg');
-	  }
-	  77% {
-		background-image: url('../images/demo/dog8.jpg');
-	  }
-	  88% {
-		background-image: url('../images/demo/dog9.jpg');
-	  }
-	  100% {
-	  	background-image: url('../images/demo/dog10.jpg');
-	  }
-	}
+@-webkit-keyframes dog {
+  0% {
+    background-image: url('../images/demo/dog1.jpg');
+  }
+  11% {
+    background-image: url('../images/demo/dog2.jpg');
+  }
+  22% {
+    background-image: url('../images/demo/dog3.jpg');
+  }
+  33% {
+    background-image: url('../images/demo/dog4.jpg');
+  }
+  44% {
+    background-image: url('../images/demo/dog5.jpg');
+  }
+  55% {
+    background-image: url('../images/demo/dog6.jpg');
+  }
+  66% {
+	background-image: url('../images/demo/dog7.jpg');
+  }
+  77% {
+	background-image: url('../images/demo/dog8.jpg');
+  }
+  88% {
+	background-image: url('../images/demo/dog9.jpg');
+  }
+  100% {
+  	background-image: url('../images/demo/dog10.jpg');
+  }
 }
