@@ -1,0 +1,2 @@
+(function() { this.JST || (this.JST = {}); this.JST["templates/code"] = function(obj){var __p=[],print=function(){__p.push.apply(__p,arguments);};with(obj||{}){__p.push('<div id="', name ,'__filmstrip"></div>\n<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/pym/0.4.1/pym.min.js"></script>\n<script type="text/javascript">new pym.Parent(\'', name ,'__filmstrip\',\'', url ,'\');</script>\n');}return __p.join('');};
+}).call(this);
