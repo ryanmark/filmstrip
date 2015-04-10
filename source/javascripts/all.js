@@ -1,5 +1,13 @@
 //= require_tree .
 (function($) {
+  // make sure auth
+  if (window.location.hostname != 'localhost' &&
+      window.location.hostname != '127.0.0.1' &&
+      window.location.hostname != '0.0.0.0' &&
+      window.location.protocol == "http:") {
+    window.location = "https:" + window.location.href.substr(5);
+  }
+
   // Browser-side applications do not use the API secret.
   var client = new Dropbox.Client({ key: "v0wp7w9d9w6c2e2" }),
       embedTmpl = JST["templates/embed"],
@@ -128,10 +136,14 @@
             $('#auth').hide();
           });
         });
+      $('#publish').attr('disabled', true);
     }
 
     $('#publish').click(function(eve) {
       eve.preventDefault();
+      $(this)
+        .attr('disabled', true)
+        .text('Doing stuff...');
       doAuth(function(err, client) {
         if (err) throw err;
         saveToDropbox({
