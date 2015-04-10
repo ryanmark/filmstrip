@@ -128,7 +128,6 @@
 
     if(!client.isAuthenticated()) {
       $('#auth')
-        .show()
         .click(function(eve) {
           eve.preventDefault();
           doAuth(function(err, client) {
@@ -137,6 +136,8 @@
           });
         });
       $('#publish').attr('disabled', true);
+    } else {
+      $('#auth-dropbox').hide();
     }
 
     $('#publish').click(function(eve) {
