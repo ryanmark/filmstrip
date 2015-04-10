@@ -126,7 +126,13 @@
           progress: function(s, t) { console.log((s/t)*100 + '%');
                    $(".meter")[0].style.width=  (s/t)*100 + '%';
                     },
-          finished: function(embedCode) { console.log(embedCode); },
+          finished: function(embedCode) { console.log(embedCode);
+                      var embedRes = document.createElement('textarea')
+                      embedRes.textContent = embedCode;
+                      var a = $(".result")[0];
+                      a.innerHTML = "";
+                      $(a).append(embedRes);
+                    },
           error: function(err) { alert(err.response.error); }
         });
       });
