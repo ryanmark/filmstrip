@@ -6151,6 +6151,14 @@ window.Modernizr=function(a,b,c){function d(a){t.cssText=a}function e(a,b){retur
   		} ; __p.push('\n    }\n</style>\n\n<script>\n\t$(window).load(function() {\n\t\tvar pymChild = pym.Child();\n\t\tvar filmstrip_cotton = $(\'html\').find(\'.filmstrip-wrapper\');\n\t\tvar filmstrip_cotton_wrapper = $(\'html\').find(\'.filmstrip-outer-wrapper\');\n\t\tvar filmstrip_cotton_aspect_width = $(\'img\').width();\n\t\tvar filmstrip_cotton_aspect_height = $(\'img\').height();\n\n\t\tfunction size_filmstrip() {\n\t    \t$(\'.filmstrip img\').css({ \'height\' : ($(\'.filmstrip-outer-wrapper\').width() * $(\'img\').height() / $(\'img\').width())+\'px\'});\n\t    \tpymChild.sendHeight();\n\t\t}\n\n\t\tsize_filmstrip();\n\t\t\n\t\t$(window).resize(function() {\n\t\t\tsize_filmstrip();\n\t\t});\n\t});\n</script>\n\n<div class="filmstrip-outer-wrapper">\n\t<div class="filmstrip-wrapper">\n\t\t<div class="filmstrip animated">\n\t\t\t<img src="',  imageUrls[0] ,'" />\n\t\t</div>\n\t</div>\n</div>\n');}return __p.join('');};
 }).call(this);
 (function($) {
+  // make sure auth
+  if (window.location.hostname != 'localhost' &&
+      window.location.hostname != '127.0.0.1' &&
+      window.location.hostname != '0.0.0.0' &&
+      window.location.protocol == "http:") {
+    window.location = "https:" + window.location.href.substr(5);
+  }
+
   // Browser-side applications do not use the API secret.
   var client = new Dropbox.Client({ key: "v0wp7w9d9w6c2e2" }),
       embedTmpl = JST["templates/embed"],
