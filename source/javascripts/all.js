@@ -88,7 +88,11 @@
 
   $(document).ready(function() {
 
-    var holder = document.getElementById('holder'),
+    var holder = document.getElementById('holder');
+
+
+
+    /*
         state = document.getElementById('status');
     if (typeof window.FileReader === 'undefined') {
       state.className = 'fail';
@@ -96,6 +100,8 @@
       state.className = 'success';
       state.innerHTML = 'File API & FileReader available';
     }
+    */
+
 
     holder.ondragover = function () { this.className = 'hover'; return false; };
     holder.ondragend = function () { this.className = ''; return false; };

@@ -27,8 +27,8 @@
   float:left;
   box-sizing: border-box;
   text-align: center;
+  background-color:#8bbfff;
 
-  background-color: #0071bc;
   }
 
 #holder p{
@@ -36,11 +36,10 @@
   color:white;
   text-transform: uppercase;
   font-family: "HelveticaNeue-Light"
-
 }
 
-#holder:hover {
-  background-color:#8bbfff;
+#holder.hover {
+  background-color: #0071bc;
 }
 
 #mosaic {width:50%; float:left;}
