@@ -1,3 +1,8 @@
+.container {
+  max-width: 100%;
+  margin: 0 auto;
+}
+
 .filmstrip-outer-wrapper {
     max-width: 100%;
     margin-bottom: 1em;
@@ -16,11 +21,6 @@
     -webkit-animation-timing-function:steps(1, end);
     background-repeat: no-repeat;
     background-size: 100% auto;
-    // max-width: 100%;
-    // height: auto;
-    // padding-top: 30%;
-    //background-size: 100% 2500%;
-    //background-image: url('../images/demo/IMG_5129.JPG');
     @media screen and (min-width: 768px) { 
         // background-image: url('../img/filmstrip-cotton-archive.jpg');
     }

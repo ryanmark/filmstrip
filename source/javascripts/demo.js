@@ -26,7 +26,7 @@
 // 		}
 // });
 
-$(document).ready(function() {
+$(window).load(function() {
 	var filmstrip_cotton = $('html').find('.filmstrip-wrapper');
 	var filmstrip_cotton_wrapper = $('html').find('.filmstrip-outer-wrapper');
 	var filmstrip_cotton_aspect_width = $('img').width();
