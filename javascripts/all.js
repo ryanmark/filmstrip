@@ -6269,8 +6269,24 @@ window.Modernizr=function(a,b,c){function d(a){t.cssText=a}function e(a,b){retur
       showMosaic('#holder', e.dataTransfer.files);
     };
 
+    if(!client.isAuthenticated()) {
+      $('#auth')
+        .show()
+        .click(function(eve) {
+          eve.preventDefault();
+          doAuth(function(err, client) {
+            if (err) throw err;
+            $('#auth').hide();
+          });
+        });
+      $('#publish').attr('disabled', true);
+    }
+
     $('#publish').click(function(eve) {
       eve.preventDefault();
+      $(this)
+        .attr('disabled', true)
+        .text('Doing stuff...');
       doAuth(function(err, client) {
         if (err) throw err;
         saveToDropbox({
