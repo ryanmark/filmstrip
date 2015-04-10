@@ -1,27 +1,35 @@
 .filmstrip-outer-wrapper {
-    width: 100%;
+    max-width: 100%;
     margin-bottom: 1em;
+}
+
+.filmstrip-wrapper {
+    max-width: 100%;
+}
  
-    .filmstrip-wrapper {
-        width: 720px;
-        height: 528px;
+.filmstrip {
+    //max-width: 100%;
+    -webkit-animation-name: dog;
+    -webkit-animation-duration: 2s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-timing-function:steps(1, end);
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    // max-width: 100%;
+    // height: auto;
+    // padding-top: 30%;
+    //background-size: 100% 2500%;
+    //background-image: url('../images/demo/IMG_5129.JPG');
+    @media screen and (min-width: 768px) { 
+        // background-image: url('../img/filmstrip-cotton-archive.jpg');
     }
- 
-    .filmstrip {
-        width: 100%;
-        height: 100%;
-        -webkit-animation-name: gif;
-		-webkit-animation-duration: 2s;
-		-webkit-animation-iteration-count: infinite;
-		-webkit-animation-timing-function: linear;
-		-webkit-animation-timing-function:steps(1, end);
-        //background-size: 100% 2500%;
-        background-size: 800px;
-        //background-image: url('../images/demo/IMG_5129.JPG');
-        @media screen and (min-width: 768px) { 
-            // background-image: url('../img/filmstrip-cotton-archive.jpg');
-        }
-    }
+}
+
+.filmstrip img {
+  visibility: hidden;
+  max-width: 100%; 
+  height: auto;
 }
  //    @-webkit-keyframes gif {
 	//   0% {
