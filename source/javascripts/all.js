@@ -40,6 +40,7 @@
         imageUrls = [],
         progressTotal = 5 + imageData.length*2,
         progressCount = 0,
+        imageCount = 0,
         errorCallback = function(err) { throw err; };
     if(opts.progress) opts.progress(progressCount, progressTotal);
     if(opts.error) errorCallback = opts.error;
@@ -59,7 +60,7 @@
             progressCount++;
             if(opts.progress) opts.progress(progressCount, progressTotal);
             imageUrls[i] = url.url;
-            if (imageUrls.length != imageData.length) return;
+            if (++imageCount < imageData.length) return;
             var indexPath = projectDir + '/index.html',
                 embedCodePath = projectDir + '/embed.txt',
                 data = { imageUrls: imageUrls };
