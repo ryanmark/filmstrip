@@ -1,13 +1,18 @@
 /* line 1, /Users/rmark/Code/filmstrip/source/stylesheets/demo.scss */
+.container {
+  max-width: 100%;
+  margin: 0 auto; }
+
+/* line 6, /Users/rmark/Code/filmstrip/source/stylesheets/demo.scss */
 .filmstrip-outer-wrapper {
   max-width: 100%;
   margin-bottom: 1em; }
 
-/* line 6, /Users/rmark/Code/filmstrip/source/stylesheets/demo.scss */
+/* line 11, /Users/rmark/Code/filmstrip/source/stylesheets/demo.scss */
 .filmstrip-wrapper {
   max-width: 100%; }
 
-/* line 10, /Users/rmark/Code/filmstrip/source/stylesheets/demo.scss */
+/* line 15, /Users/rmark/Code/filmstrip/source/stylesheets/demo.scss */
 .filmstrip {
   -webkit-animation-name: dog;
   -webkit-animation-duration: 2s;
