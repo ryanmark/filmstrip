@@ -118,6 +118,18 @@
       showMosaic('#holder', e.dataTransfer.files);
     };
 
+    if(!client.isAuthenticated()) {
+      $('#auth')
+        .show()
+        .click(function(eve) {
+          eve.preventDefault();
+          doAuth(function(err, client) {
+            if (err) throw err;
+            $('#auth').hide();
+          });
+        });
+    }
+
     $('#publish').click(function(eve) {
       eve.preventDefault();
       doAuth(function(err, client) {
