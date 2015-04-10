@@ -59,3 +59,19 @@
   min-width:75px;
   width:33%;
 }
+
+.progress{
+ height: 50px;
+}
+
+.progress .meter{
+ background:#0071bc;
+}
+
+.meter{
+  width:0%;
+}
+
+#publish{
+ background-color:#0071bc;
+}

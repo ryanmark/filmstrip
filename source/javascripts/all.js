@@ -40,6 +40,7 @@
         imageUrls = [],
         progressTotal = 5 + imageData.length*2,
         progressCount = 0,
+        imageCount = 0,
         errorCallback = function(err) { throw err; };
     if(opts.progress) opts.progress(progressCount, progressTotal);
     if(opts.error) errorCallback = opts.error;
@@ -59,7 +60,7 @@
             progressCount++;
             if(opts.progress) opts.progress(progressCount, progressTotal);
             imageUrls[i] = url.url;
-            if (imageUrls.length != imageData.length) return;
+            if (++imageCount < imageData.length) return;
             var indexPath = projectDir + '/index.html',
                 embedCodePath = projectDir + '/embed.txt',
                 data = { imageUrls: imageUrls };
@@ -122,7 +123,9 @@
       doAuth(function(err, client) {
         if (err) throw err;
         saveToDropbox({
-          progress: function(s, t) { console.log((s/t)*100 + '%'); },
+          progress: function(s, t) { console.log((s/t)*100 + '%');
+                   $(".meter")[0].style.width=  (s/t)*100 + '%';
+                    },
           finished: function(embedCode) { console.log(embedCode); },
           error: function(err) { alert(err.response.error); }
         });
