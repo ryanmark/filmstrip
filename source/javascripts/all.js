@@ -128,10 +128,14 @@
             $('#auth').hide();
           });
         });
+      $('#publish').attr('disabled', true);
     }
 
     $('#publish').click(function(eve) {
       eve.preventDefault();
+      $(this)
+        .attr('disabled', true)
+        .text('Doing stuff...');
       doAuth(function(err, client) {
         if (err) throw err;
         saveToDropbox({
