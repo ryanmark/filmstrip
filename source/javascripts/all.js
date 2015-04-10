@@ -16,6 +16,11 @@
   };
 
   var showMosaic = function(selector, files) {
+
+    var inst= document.getElementById('instructions');
+    inst.innerHTML = "";
+
+
     $.each(files, function(i, file) {
       var img = new Image();
       img.id = 'upload' + i;
@@ -109,7 +114,7 @@
       e.preventDefault();
       this.className = '';
       imageData = e.dataTransfer.files;
-      showMosaic('#mosaic', e.dataTransfer.files);
+      showMosaic('#holder', e.dataTransfer.files);
     };
 
     $('#publish').click(function(eve) {
