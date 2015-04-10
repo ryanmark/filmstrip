@@ -14,3 +14,6 @@ gem "wdm", "~> 0.1.0", :platforms => [:mswin, :mingw]
 gem "tzinfo-data", platforms: [:mswin, :mingw]
 
 gem "ejs"
+
+gem "sass", "~> 3.4.0"
+gem "compass", "~> 1.0"

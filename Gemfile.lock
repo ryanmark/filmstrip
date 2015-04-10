@@ -124,8 +124,10 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  compass (~> 1.0)
   ejs
   middleman (~> 3.3.10)
   middleman-livereload (~> 3.1.0)
+  sass (~> 3.4.0)
   tzinfo-data
   wdm (~> 0.1.0)
