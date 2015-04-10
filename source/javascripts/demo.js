@@ -33,12 +33,12 @@ $(document).ready(function() {
 	var filmstrip_cotton_aspect_height = $('img').height();
 
 	function size_filmstrip() {
-    	var filmstrip_cotton_width = filmstrip_cotton_wrapper.width();
-    	var filmstrip_cotton_height = Math.ceil((filmstrip_cotton_width * filmstrip_cotton_aspect_height) / filmstrip_cotton_aspect_width);
-    	filmstrip_cotton.width(filmstrip_cotton_width + 'px').height(filmstrip_cotton_height + 'px');
+    	$('.filmstrip img').css({ 'height' : ($('.filmstrip-outer-wrapper').width() * $('img').height() / $('img').width())+'px'});
 	}
 
+	size_filmstrip();
+	
 	$(window).resize(function() {
-		$('.filmstrip').css({ 'background-size' : 100% ((('html').find('.filmstrip-outer-wrapper').width() * filmstrip_cotton_aspect_height) / filmstrip_cotton_aspect_width)% });
+		size_filmstrip();
 	});
 });
