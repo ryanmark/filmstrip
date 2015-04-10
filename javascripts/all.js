@@ -6279,7 +6279,6 @@ window.Modernizr=function(a,b,c){function d(a){t.cssText=a}function e(a,b){retur
 
     if(!client.isAuthenticated()) {
       $('#auth')
-        .show()
         .click(function(eve) {
           eve.preventDefault();
           doAuth(function(err, client) {
@@ -6288,6 +6287,8 @@ window.Modernizr=function(a,b,c){function d(a){t.cssText=a}function e(a,b){retur
           });
         });
       $('#publish').attr('disabled', true);
+    } else {
+      $('#auth-dropbox').hide();
     }
 
     $('#publish').click(function(eve) {
