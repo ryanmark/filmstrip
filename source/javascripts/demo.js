@@ -27,13 +27,11 @@
 // });
 
 $(window).load(function() {
-	var filmstrip_cotton = $('html').find('.filmstrip-wrapper');
-	var filmstrip_cotton_wrapper = $('html').find('.filmstrip-outer-wrapper');
-	var filmstrip_cotton_aspect_width = $('img').width();
-	var filmstrip_cotton_aspect_height = $('img').height();
+	var filmstrip_aspect_width = $('img').width();
+	var filmstrip_aspect_height = $('img').height();
 
 	function size_filmstrip() {
-    	$('.filmstrip img').css({ 'height' : ($('.filmstrip-outer-wrapper').width() * $('img').height() / $('img').width())+'px'});
+    	$('.filmstrip img').css({ 'height' : ($('.filmstrip-outer-wrapper').width() * filmstrip_aspect_height / filmstrip_aspect_width)+'px'});
 	}
 
 	size_filmstrip();
