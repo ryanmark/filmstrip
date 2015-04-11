@@ -157,7 +157,7 @@
     if(client.isAuthenticated()) {
       setLoggedIn();
     } else {
-      setLoggdedOut();
+      setLoggedOut();
     }
 
     $('#publish').click(function(eve) {
