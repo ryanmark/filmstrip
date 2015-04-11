@@ -26,41 +26,72 @@
   <span id="heavy-title">FILM</span>STRIP
 </div>
 
-<div class="wrapper">
+
+<div class="row" id="auth-dropbox">
+  <div class="medium-6 columns text-right">
+    <img src="/filmstrip/images/Dropbox.svg" />
+  </div>
+
+  <div class="medium-6 columns text-left">
+    <button id="auth">Sign in with DropBox</button>
+  </div>
+</div>
+
+<div class="breaker">
   <div class="row">
-    <div id="holder">
-      <div id="instructions">
-      <div class="row">
-          <img src="images/Plus.svg">
-      </div>
-      <div class="row">
-        <p>Drag and drop your photos.</p>
-      </div>
+    <div class="large-8 large-offset-2 columns">
+      <div id="holder">
+        <div id="instructions">
+          <div class="row">
+            <img src="/filmstrip/images/Plus.svg" />
+          </div>
+
+          <div class="row">
+            <p>Drag and drop your&nbsp;photos.</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
+</div>
 
-  <div class="row">
+<div class="row">
+  <div class="large-8 large-offset-2 columns">
+    <input type="text" placeholder="Name your filmstrip" id="name" />
     <div id="mosaic"></div>
   </div>
+</div>
 
-  <div class="row">
-    <pre id="embed-code"></pre>
+<div class="row">
+  <div class="large-4 columns">
+    <button class="expand" id="publish">Create Filmstrip</button>
+    <p>This will save to your Dropbox</p>
   </div>
-
-  <div class="row">
-    <div class="large-4 columns">
-      <button id="publish">Create Filmstrip</button>
-      <p>This will save to your Dropbox</p>
-    </div>
-    <div class="large-8 columns">
+  <div class="large-8 columns">
+    <div class="result">
       <div class="progress"><span class="meter"></span></div>
     </div>
   </div>
-  <div class="push"></div>
 </div>
 
-<div class="footer"><p>Filmstrip was made by <a href="https://twitter.com/ryanmark" target="_blank">Ryan Mark</a>, <a href="https://twitter.com/cdukehart" target="_blank">Coburn Dukes</a>, <a href="https://twitter.com/nicolelzhu" target="_blank"> Nicole Zhu</a>, <a href="https://twitter.com/tavocaballero" target="_blank">Tavo Caballero</a> and <a href="https://twitter.com/whichlight" target="_blank">Kawandeep Virdee</a> at <a href="www.snd.org/2015/02/sndmakes-at-snddc-how-might-we-better-tell-picture-stories/" target="_blank">#SNDMakes</a>.</p></div>
+<div class="row">
+  <pre id="embed-code"></pre>
+</div>
+
+<footer class="breaker">
+  <div class="row">
+    <div class="large-8 large-offset-2">
+      <p>Filmstrip was made by
+      <a href="https://twitter.com/ryanmark" target="_blank">Ryan Mark</a>,
+      <a href="https://twitter.com/cdukehart" target="_blank">Coburn Dukes</a>,
+      <a href="https://twitter.com/nicolelzhu" target="_blank"> Nicole Zhu</a>,
+      <a href="https://twitter.com/tavocaballero" target="_blank">Tavo Caballero</a>
+      and <a href="https://twitter.com/whichlight" target="_blank">Kawandeep Virdee</a>
+      at <a href="www.snd.org/2015/02/sndmakes-at-snddc-how-might-we-better-tell-picture-stories/" target="_blank">#SNDMakes</a>.
+      </p>
+    </div>
+  </div>
+</footer>
 
   </body>
 </html>
