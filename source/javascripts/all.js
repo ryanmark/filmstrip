@@ -10,25 +10,36 @@
 
   // Browser-side applications do not use the API secret.
   var client = new Dropbox.Client({ key: "v0wp7w9d9w6c2e2" }),
-      embedTmpl = JST["templates/embed"],
-      codeTmpl  = JST["templates/code"],
-      imageData = [],
+      embedTmpl   = JST["templates/embed"],
+      codeTmpl    = JST["templates/code"],
+      welcomeTmpl = JST["templates/welcome"],
+      imageData   = [],
       projectName = 'Test Project';
+
+  var loadAuth = function() {
+    if (localStorage) {
+      var auth = JSON.parse(localStorage.getItem('dropboxAuth'));
+      if (auth) client.setCredentials(auth);
+    }
+  };
+
+  var saveAuth = function() {
+    if (localStorage) {
+      var auth = client.credentials();
+      localStorage.setItem('dropboxAuth', JSON.stringify(auth));
+    }
+  };
 
   var doAuth = function(cb) {
     if (client.isAuthenticated()) return cb();
     client.authenticate(function(err, client) {
       if(err) throw err;
+      saveAuth();
       cb();
     });
   };
 
   var showMosaic = function(selector, files) {
-
-    var inst= document.getElementById('instructions');
-    inst.innerHTML = "";
-
-
     $.each(files, function(i, file) {
       var img = new Image();
       img.id = 'upload' + i;
@@ -38,6 +49,15 @@
         img.src = event.target.result;
       };
       reader.readAsDataURL(file);
+    });
+  };
+
+  var setWelcome = function() {
+    client.getAccountInfo(function(err, acct, stat) {
+      if(err) throw err;
+      $('#auth-dropbox')
+        .css('visibility', 'visible')
+        .html(welcomeTmpl(acct));
     });
   };
 
@@ -100,44 +120,33 @@
     });
   };
 
+  loadAuth();
+
   $(document).ready(function() {
 
     var holder = document.getElementById('holder');
-
-
-
-    /*
-        state = document.getElementById('status');
-    if (typeof window.FileReader === 'undefined') {
-      state.className = 'fail';
-    } else {
-      state.className = 'success';
-      state.innerHTML = 'File API & FileReader available';
-    }
-    */
-
-
     holder.ondragover = function () { this.className = 'hover'; return false; };
     holder.ondragend = function () { this.className = ''; return false; };
     holder.ondrop = function (e) {
       e.preventDefault();
       this.className = '';
       imageData = e.dataTransfer.files;
-      showMosaic('#holder', e.dataTransfer.files);
+      showMosaic('#mosaic', e.dataTransfer.files);
     };
 
-    if(!client.isAuthenticated()) {
+    if(client.isAuthenticated()) {
+      setWelcome();
+    } else {
+      $('#auth-dropbox').css('visibility', 'visible');
       $('#auth')
         .click(function(eve) {
           eve.preventDefault();
           doAuth(function(err, client) {
             if (err) throw err;
-            $('#auth').hide();
+            setWelcome();
           });
         });
       $('#publish').attr('disabled', true);
-    } else {
-      $('#auth-dropbox').hide();
     }
 
     $('#publish').click(function(eve) {
@@ -148,19 +157,23 @@
       doAuth(function(err, client) {
         if (err) throw err;
         saveToDropbox({
-          progress: function(s, t) { console.log((s/t)*100 + '%');
-                   $(".meter")[0].style.width=  (s/t)*100 + '%';
-                    },
-          finished: function(embedCode) { console.log(embedCode);
-                      var embedRes = document.createElement('textarea')
-                      embedRes.textContent = embedCode;
-                      var a = $(".result")[0];
-                      a.innerHTML = "";
-                      $(a).append(embedRes);
-                    },
+          progress: function(s, t) {
+            $(".meter").width((s/t)*100 + '%');
+          },
+          finished: function(embedCode) {
+            var embedRes = document.createElement('textarea');
+            embedRes.textContent = embedCode;
+            var a = $(".result")[0];
+            a.innerHTML = "";
+            $(a).append(embedRes);
+          },
           error: function(err) { alert(err.response.error); }
         });
       });
+    });
+
+    $('#name').keypress(function(eve) {
+      projectName = $(this).val();
     });
   });
 })(jQuery);

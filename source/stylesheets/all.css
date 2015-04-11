@@ -15,6 +15,17 @@ html, body {
   width:100%;
   font-family: "HelveticaNeue-Light";
 }
+.breaker {
+  background-color: #8bbfff;
+  margin: 20px 0;
+  padding: 20px 0;
+  color: white;
+}
+.breaker a {
+  color: white;
+  font-weight:bold;
+  text-decoration:underline;
+}
 
 #heavy-title{
   font-family: "Helvetica";
@@ -22,38 +33,40 @@ html, body {
 }
 
 #holder {
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  border-radius: 20px;
 
-  border: 5px solid #8bbfff;
-  width: 100%;
-  height: 300px;
+  border: 5px solid white;
   margin: 20px auto;
-  float:left;
-  box-sizing: border-box;
-  text-align: center;
+  padding:20px;
+  min-height:389px;
 
   background-color: #0071bc;
-  margin-top:60px;
-  }
-
-#holder img {
-  width:150px;
-  margin-top:30px;
 }
 
+#instructions {
+  text-align: center;
+  letter-spacing: 2px;
+}
 
-#auth-dropbox img {
-  width:150px;
-  margin-top:30px;
+#holder img {
 }
 
 #auth-dropbox{
  width: 50%;
  margin: 0 auto;
- height:150px;
-
+ height:180px;
+ text-align:center;
+ visibility:hidden;
+}
+#auth-dropbox h2 {
+ margin-top:60px;
+}
+#auth-dropbox img {
+  margin-top: 36px;
+  max-height: 120px;
+  max-width: 120px;
 }
 
 #auth {
@@ -62,26 +75,30 @@ html, body {
 }
 
 #holder p{
+  margin:0;
+  line-height:1.1em;
   font-size:50px;
   color:white;
   text-transform: uppercase;
   font-family: "HelveticaNeue-Light"
+}
+#holder img {
+  max-width:33%;
+  max-height:33%;
+}
+
+#holder .row {
+  margin:30px 0;
 }
 
 #holder.hover {
   background-color:#005592;
 }
 
-#holder:hover {
-
-  background-color:#005592;
-}
-
-#mosaic {width:50%; float:left;}
 #mosaic img {
   max-width: 150px;
   min-width:75px;
-  width:33%;
+  width:calc(100% / 6);
 }
 
 .progress{
@@ -96,8 +113,24 @@ html, body {
   width:0%;
 }
 
-#publish{
+button.disabled:hover, button.disabled:focus, button[disabled]:hover, button[disabled]:focus, .button.disabled:hover, .button.disabled:focus, .button[disabled]:hover, .button[disabled]:focus, button.disabled, button[disabled], .button.disabled, .button[disabled] {
+  background-color:#dfdfdf;
+  color:#666;
+}
+.button, button{
  background-color:#0071bc;
+}
+
+#name {
+  border:0;
+  padding-left:0;
+  padding-right:0;
+  font-size:36px;
+  line-height:1em;
+  height:auto;
+  background:none;
+  box-shadow:none;
+  border-bottom:3px solid #0071bc;
 }
 
 .wrapper {
@@ -107,15 +140,13 @@ html, body {
   margin: 0 auto;
 }
 
-.footer {
+footer {
   text-align: center;
 }
-.footer p {
-  font-size: 1em;
-  color: #333;
+footer.breaker {
+  margin-bottom:0;
 }
-
-.footer, .push {
-  height: 1em;
-  clear: both;
+footer p {
+  font-size: 1em;
+  margin:0;
 }
