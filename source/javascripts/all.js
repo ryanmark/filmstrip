@@ -13,6 +13,7 @@
       embedTmpl   = JST["templates/embed"],
       codeTmpl    = JST["templates/code"],
       welcomeTmpl = JST["templates/welcome"],
+      alertTmpl   = JST["templates/alert"],
       imageData   = [],
       projectName = 'Test Project';
 
@@ -177,7 +178,12 @@
             a.innerHTML = "";
             $(a).append(embedRes);
           },
-          error: function(err) { alert(err.response.error); }
+          error: function(err) {
+            $('#alert').append(alertTmpl({
+              msg: err.response.error,
+              type: 'alert'
+            }));
+          }
         });
       });
     });

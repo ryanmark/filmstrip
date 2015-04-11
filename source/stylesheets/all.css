@@ -95,6 +95,9 @@ html, body {
   background-color:#005592;
 }
 
+#mosaic {
+  margin:10px 0;
+}
 #mosaic img {
   max-width: 150px;
   min-width:75px;
