@@ -6304,7 +6304,7 @@ window.Modernizr=function(a,b,c){function d(a){t.cssText=a}function e(a,b){retur
     if(client.isAuthenticated()) {
       setLoggedIn();
     } else {
-      setLoggdedOut();
+      setLoggedOut();
     }
 
     $('#publish').click(function(eve) {
