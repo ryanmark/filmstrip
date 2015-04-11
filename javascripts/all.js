@@ -6197,13 +6197,42 @@ window.Modernizr=function(a,b,c){function d(a){t.cssText=a}function e(a,b){retur
     });
   };
 
-  var setWelcome = function() {
+  var setLoggedIn = function() {
     client.getAccountInfo(function(err, acct, stat) {
       if(err) throw err;
       $('#auth-dropbox')
         .css('visibility', 'visible')
         .html(welcomeTmpl(acct));
+      $('#publish').attr('disabled', false);
+
+      var holder = document.getElementById('holder');
+      holder.ondragover = function () { this.className = 'hover'; return false; };
+      holder.ondragend = function () { this.className = ''; return false; };
+      holder.ondrop = function (e) {
+        e.preventDefault();
+        this.className = '';
+        imageData = e.dataTransfer.files;
+        showMosaic('#mosaic', e.dataTransfer.files);
+      };
     });
+  };
+
+  var setLoggedOut = function() {
+    $('#auth-dropbox').css('visibility', 'visible');
+    $('#auth')
+      .click(function(eve) {
+        eve.preventDefault();
+        doAuth(function(err, client) {
+          if (err) throw err;
+          setLoggedIn();
+        });
+      });
+    $('#publish').attr('disabled', true);
+
+    var holder = document.getElementById('holder');
+    holder.ondragover = null;
+    holder.ondragend = null;
+    holder.ondrop = null;
   };
 
   var saveToDropbox = function(opts) {
@@ -6269,29 +6298,10 @@ window.Modernizr=function(a,b,c){function d(a){t.cssText=a}function e(a,b){retur
 
   $(document).ready(function() {
 
-    var holder = document.getElementById('holder');
-    holder.ondragover = function () { this.className = 'hover'; return false; };
-    holder.ondragend = function () { this.className = ''; return false; };
-    holder.ondrop = function (e) {
-      e.preventDefault();
-      this.className = '';
-      imageData = e.dataTransfer.files;
-      showMosaic('#mosaic', e.dataTransfer.files);
-    };
-
     if(client.isAuthenticated()) {
-      setWelcome();
+      setLoggedIn();
     } else {
-      $('#auth-dropbox').css('visibility', 'visible');
-      $('#auth')
-        .click(function(eve) {
-          eve.preventDefault();
-          doAuth(function(err, client) {
-            if (err) throw err;
-            setWelcome();
-          });
-        });
-      $('#publish').attr('disabled', true);
+      setLoggdedOut();
     }
 
     $('#publish').click(function(eve) {
